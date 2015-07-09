@@ -1,0 +1,29 @@
+{
+  "name": "sales-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-ymakanjuola/sales-manager.git"
+  },
+  "author": "yinka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-ymakanjuola/sales-manager/issues"
+  },
+  "homepage": "https://github.com/andela-ymakanjuola/sales-manager#readme",
+  "dependencies": {
+    "angular": "^1.4.2",
+    "angular-animate": "^1.4.2",
+    "angular-aria": "^1.4.2",
+    "angular-material": "^0.10.0",
+    "angularfire": "^1.1.2",
+    "express": "^4.13.1",
+    "firebase": "^2.2.7",
+    "material-design-lite": "^1.0.0-3"
+  }
+}
