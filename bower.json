@@ -1,0 +1,25 @@
+{
+  "name": "sales-manager",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/andela-ymakanjuola/sales-manager",
+  "moduleType": [
+    "node"
+  ],
+  "authors": [
+    "yinka"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "~0.10.0",
+    "firebase": "~2.2.7"
+  }
+}
