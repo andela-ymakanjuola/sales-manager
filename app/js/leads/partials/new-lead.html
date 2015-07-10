@@ -1,0 +1,51 @@
+<md-dialog style="width: 320px" aria-label="New Project Modal">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <span> New Lead </span>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding>
+
+    <form name="leadForm">
+      <md-input-container>
+        <label>Contact Name</label>
+        <input ng-model="lead.contact" name="contactName" required>
+        <div ng-messages="leadForm.contactName.$error" ng-show="leadForm.contactName.$invalid && submitted">
+          <div ng-message="required"> Name is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Company Name</label>
+        <input ng-model="lead.company" name="companyName" required>
+        <div ng-messages="leadForm.companyName.$error" ng-show="leadForm.companyName.$invalid && submitted">
+          <div ng-message="required"> Name is required.</div>
+        </div>
+      </md-input-container>
+      <md-select placeholder="Lead Type" ng-model="lead.lead_type">
+        <md-option>Hot</md-option>
+        <md-option>Cold</md-option>
+      </md-select>
+      <md-input-container>
+        <label>Sales Rep</label>
+        <input ng-model="lead.sales_rep" name="salesRep" required>
+        <div ng-messages="leadForm.salesRep.$error" ng-show="leadForm.salesRep.$invalid && submitted">
+          <div ng-message="required"> Name is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Start Date</label>
+        <input ng-model="lead.start_date" type="date" name="start_date">
+      </md-input-container>
+      <md-select placeholder="Status" ng-model="lead.status">
+        <md-option>New</md-option>
+        <md-option>Ending</md-option>
+        <md-option>Sold</md-option>
+      </md-select>
+    </form>
+
+  <div class="md-actions" layout="row" layout-align="end">
+    <md-button class="md-primary" ng-click="close()"> Cancel</md-button>
+    <md-button class="md-accent" ng-click="save(leadForm.$valid)"> Save</md-button>
+  </div>
+  </md-content>
+</md-dialog>
