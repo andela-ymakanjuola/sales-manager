@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/andela-ymakanjuola/sales-manager#readme",
   "dependencies": {
-    "express": "^4.13.1",
-    "material-design-lite": "^1.0.0-3"
+    "express": "^4.13.1"
   }
 }
