@@ -1,11 +1,10 @@
-<md-dialog style="width: 320px" aria-label="New Project Modal">
+<md-dialog style="width: 380px" aria-label="New Project Modal">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <span> New Lead </span>
     </div>
   </md-toolbar>
-  <md-content layout-padding>
-
+  <md-content style="max-height:300px;" layout-padding>
     <form name="leadForm">
       <md-input-container>
         <label>Contact Name</label>
@@ -34,18 +33,17 @@
       </md-input-container>
       <md-input-container>
         <label>Start Date</label>
-        <input ng-model="lead.start_date" type="date" name="start_date">
+        <input ng-model="lead.startDate" type="date" name="startDate">
       </md-input-container>
-      <md-select placeholder="Status" ng-model="lead.status">
-        <md-option>New</md-option>
-        <md-option>Ending</md-option>
-        <md-option>Sold</md-option>
+      <md-select placeholder="Status" ng-model="lead.status.name">
+        <md-option ng-repeat="phase in phases">{{phase.name}}</md-option>
       </md-select>
     </form>
-
-  <div class="md-actions" layout="row" layout-align="end">
-    <md-button class="md-primary" ng-click="close()"> Cancel</md-button>
-    <md-button class="md-accent" ng-click="save(leadForm.$valid)"> Save</md-button>
-  </div>
   </md-content>
+  <md-divider>
+    <div class="md-actions" layout="row" layout-align="end">
+      <md-button class="md-primary" ng-click="close()"> Cancel</md-button>
+      <md-button class="md-accent" ng-click="save(leadForm.$valid)"> Save</md-button>
+    </div>
+  </md-divider>
 </md-dialog>
