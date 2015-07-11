@@ -10,7 +10,7 @@
       <md-option ng-repeat="phase in phases">{{phase.name}}</md-option>
     </md-select>
 
-    <md-checkbox ng-repeat = "list in phases[lead.status.name].checklist" ng-model="lead.status.todo[list].checked" aria-label="Checkbox 1">
+    <md-checkbox ng-repeat = "list in phases[lead.status.name].checklist" ng-model="lead.status.todo[list]" >
       {{ list }}
     </md-checkbox>
 
