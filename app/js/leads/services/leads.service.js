@@ -20,7 +20,6 @@ angular.module('Leads')
           cb(err);
         }
         else {
-          // project.id = projectRef.toString().split('/').pop();
           cb();
         }
       });
@@ -35,7 +34,7 @@ angular.module('Leads')
           cb();
         }
       });
-    },
+    }
 
   };
 }]);
