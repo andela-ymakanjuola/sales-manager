@@ -5,7 +5,7 @@ angular.module('Phases')
 
     get: function(cb) {
       if(!cb) {
-        return $firebaseArray(Refs.phases);
+        return $firebaseObject(Refs.phases);
       }
       else {
         Refs.phases.once('value', function(snap) {
@@ -15,12 +15,11 @@ angular.module('Phases')
     },
 
     create: function(lead, cb) {
-      var leadRef = Refs.phases.push(lead, function(err) {
+      var phaseref = Refs.phases.push(lead, function(err) {
         if(err) {
           cb(err);
         }
         else {
-          // project.id = projectRef.toString().split('/').pop();
           cb();
         }
       });
@@ -35,7 +34,6 @@ angular.module('Phases')
           cb();
         }
       });
-    },
-
+    }
   };
 }]);
