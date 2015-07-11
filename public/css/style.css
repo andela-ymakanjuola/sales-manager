@@ -1,5 +1,7 @@
 .container {
   margin: 0 auto;
+  text-align: center;
+  width: 100%;
 }
 
 .leads {
@@ -18,7 +20,6 @@ md-toolbar {
   height: 30px;
 }
 .mdl-data-table, td, th {
-  text-align: left !important;
   margin: 0 auto;
-  min-width: 90%;
+  width: 95%;
 }
