@@ -35,5 +35,4 @@ build/Release
 ehthumbs.db
 Thumbs.db
 
-public/vendor
 node_modules
