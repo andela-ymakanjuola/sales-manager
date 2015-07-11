@@ -5,7 +5,7 @@
 }
 
 .leads {
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   float: left;
 }
@@ -21,5 +21,6 @@ md-toolbar {
 }
 .mdl-data-table, td, th {
   margin: 0 auto;
-  width: 95%;
+  min-width: 80%;
+  max-width: 100%;
 }
