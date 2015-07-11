@@ -2,15 +2,12 @@
 <html ng-app="app">
   <head > 
     <title>Sales Manager</title>
-
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="public/css/style.css">    
     <link rel="stylesheet" href="node_modules/material-design-lite/material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="node_modules/angular-material/angular-material.css">
-    
   </head>
-  
   <body>
     <header layout="row">
       <md-toolbar class="md-primary">
@@ -27,7 +24,6 @@
           </ul>
         </h1>
       </md-toolbar>
-
     </header>   
     <div class="container">
       <md-content class="leads md-padding ng-scope md-default-theme" ng-controller="LeadsController as leads"> 
@@ -35,7 +31,7 @@
           <h3 class="md-toolbar-tools">
             <span>Leads</span>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="showLeadDialog($event)"> 
+            <md-button class="md-icon-button" ng-click="showLeadDialog($event, phases)"> 
               <i class="material-icons" style="line-height: 50px;">add</i>
               <md-tooltip>
                 Add New Lead
@@ -44,7 +40,7 @@
           </h3>
         </md-toolbar>
         <md-progress-linear ng-if="showProgress" md-mode="indeterminate"></md-progress-linear>
-        <table ng-hide="showProgress" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="text-align: left;">
+        <table ng-hide="showProgress" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
           <thead style="text-align: left;">
           <th class="mdl-data-table__cell--non-numeric">Contact Name</th>
           <th class="mdl-data-table__cell--non-numeric">Company Name</th>
@@ -54,21 +50,16 @@
           <th class="mdl-data-table__cell--non-numeric">Status</th>
           </thead>
           <tbody>
-            <tr ng-click="showLead($event,lead)" ng-repeat="lead in leads">
-              <div >
+            <tr ng-click="showLead($event,phases,lead)" ng-repeat="lead in leads">
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.contact }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.company }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.lead_type }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.start_date | date  }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.sales_rep }}</td>
-                <td class="mdl-data-table__cell--non-numeric">{{ lead.status }}</td>
-              </div>
+                <td class="mdl-data-table__cell--non-numeric">{{ lead.status.name }}</td>
             </tr>
           </tbody>
         </table>
-        <div layout="row" layout-sm="column" layout-align="end">
-          
-        </div>    
       </md-content>
       <md-content class="phases md-padding ng-scope md-default-theme" ng-controller="PhasesController as phases"> 
         <md-toolbar class="md-primary" layout="row">
@@ -84,39 +75,24 @@
           </h3>
         </md-toolbar>
         <md-progress-linear ng-if="showProgress" md-mode="indeterminate"></md-progress-linear>
-
-          <!-- <md-select placeholder="select a phase" ng-model="phase.name">
-            <md-option ng-repeat="phase in phases">{{phase.name}}</md-option>
-          </md-select> -->
-
-          <table ng-hide="showProgress" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="text-align: left;">
-            <thead style="text-align: left;">
-            <th class="mdl-data-table__cell--non-numeric">Phase</th>
-            <th class="mdl-data-table__cell--non-numeric">To-do List</th>
-            </thead>
-            <tbody>
-              <tr ng-repeat="phase in phases">
-                <td class="mdl-data-table__cell--non-numeric">
-                  <span>{{phase.name}}</span>
-                </td>
-                <td class="mdl-data-table__cell--non-numeric">
-                  <ol style="margin: 0; padding-left: 20px;">
-                    <li ng-repeat="list in phase.checklist">{{list}}</li>
-                  </ol>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <!-- <ul ng-repeat="phase in phases">
-            <li>{{phase.name}}</li>
-            <ol>
-              <li ng-repeat="list in phase.checklist">{{list}}</li>
-            </ol>
-          </ul> -->
-
-          
-          
+        <table ng-hide="showProgress" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+          <thead style="text-align: left;">
+          <th class="mdl-data-table__cell--non-numeric">Phase</th>
+          <th class="mdl-data-table__cell--non-numeric">To-do List</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="phase in phases">
+              <td class="mdl-data-table__cell--non-numeric">
+                <span>{{phase.name}}</span>
+              </td>
+              <td class="mdl-data-table__cell--non-numeric">
+                <ol style="margin: 0; padding-left: 20px;">
+                  <li ng-repeat="list in phase.checklist">{{list}}</li>
+                </ol>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </md-content>
       <div style="clear: both"></div>
     </div>
