@@ -20,22 +20,23 @@ angular.module('Phases')
         $scope.phase = {};
         $scope.phase.checklist = [];
         $scope.submitted = false;
-        $scope.number = 1;
+        $scope.number = null;
         $scope.getNumber = function(num) {
-          return new Array(parseInt(num));   
+          return num ? new Array(parseInt(num)): [];
         };
-        $scope.save = function() {
+        $scope.save = function(valid) {
           $scope.submitted = true;
-          console.log($scope.phase);
-          PhasesService.create($scope.phase, function(err) {
-            if(err) {
-              ToastService('An error occurred');
-            }
-            else {
-              ToastService($scope.phase.name + ' phase created!');
-            }
-            $mdDialog.hide();
-          });
+          if(valid) {
+            PhasesService.create($scope.phase, function(err) {
+              if(err) {
+                ToastService('An error occurred');
+              }
+              else {
+                ToastService($scope.phase.name + ' phase created!');
+              }
+              $mdDialog.hide();
+            });
+          }
         };
         $scope.close = function() {
           $mdDialog.hide();
