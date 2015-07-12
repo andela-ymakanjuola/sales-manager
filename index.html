@@ -56,7 +56,7 @@
             <tr ng-click="showLead($event,phases,lead)" ng-repeat="lead in leads">
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.contact }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.company }}</td>
-                <td class="mdl-data-table__cell--non-numeric">{{ lead.lead_type }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ lead.type }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.start_date | date  }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.sales_rep }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.status.name }}</td>
@@ -84,7 +84,7 @@
           <th class="mdl-data-table__cell--non-numeric">To-do List</th>
           </thead>
           <tbody>
-            <tr ng-repeat="phase in phases">
+            <tr ng-click="showPhase($event,phase, phaseId)" ng-repeat="(phaseId, phase) in phases">
               <td class="mdl-data-table__cell--non-numeric">
                 <span>{{phase.name}}</span>
               </td>

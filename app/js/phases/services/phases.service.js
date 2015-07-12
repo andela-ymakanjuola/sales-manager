@@ -8,7 +8,7 @@ angular.module('Phases')
         return $firebaseObject(Refs.phases);
       }
       else {
-        Refs.phases.once('value', function(snap) {
+        Refs.phases.orderByChild('no').once('value', function(snap) {
           cb(snap.val());
         });
       }

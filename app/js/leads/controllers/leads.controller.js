@@ -8,8 +8,8 @@ angular.module('Leads')
   $scope.showProgress = true;
   $scope.leads.$loaded().then(function() {
     $scope.showProgress = false;
-    angular.forEach(phases, function(phase, id) {
-      $scope.phases[phase.name] = {name: phase.name,checklist:phases[id].checklist};
+    angular.forEach(phases, function(phase, phaseId) {
+      $scope.phases[phase.name] = {id: phaseId, name: phase.name,checklist:phases[phaseId].checklist};
     });
   });
 
@@ -19,19 +19,21 @@ angular.module('Leads')
         $scope.lead = null;
         $scope.submitted = false;
         $scope.phases = phases;
-        $scope.save = function() {
+        $scope.save = function(valid) {
           $scope.submitted = true;
-          $scope.lead.start_date = $scope.lead.startDate ? $scope.lead.startDate.getTime() : null;
-          delete $scope.lead.startDate;
-          LeadsService.create($scope.lead, function(err) {
-            if(err) {
-              ToastService('An error occurred');
-            }
-            else {
-              ToastService($scope.lead.contact + ' lead created!');
-            }
-            $mdDialog.hide();
-          });
+          if (valid) {
+            $scope.lead.start_date = $scope.lead.startDate ? $scope.lead.startDate.getTime() : null;
+            delete $scope.lead.startDate;
+            LeadsService.create($scope.lead, function(err) {
+              if(err) {
+                ToastService('An error occurred');
+              }
+              else {
+                ToastService($scope.lead.contact + ' lead created!');
+              }
+              $mdDialog.hide();
+            });
+          };
         };
         $scope.close = function() {
           $mdDialog.hide();
