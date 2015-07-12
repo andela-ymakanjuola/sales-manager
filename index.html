@@ -56,7 +56,7 @@
             <tr ng-click="showLead($event,phases,lead)" ng-repeat="lead in leads">
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.contact }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.company }}</td>
-                <td class="mdl-data-table__cell--non-numeric">{{ lead.lead_type }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ lead.type }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.start_date | date  }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.sales_rep }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.status.name }}</td>
