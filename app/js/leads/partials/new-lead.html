@@ -1,4 +1,4 @@
-<md-dialog style="width: 380px" aria-label="New Project Modal">
+<md-dialog aria-label="New Project Modal">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <span> New Lead </span>
@@ -20,7 +20,7 @@
           <div ng-message="required"> Name is required.</div>
         </div>
       </md-input-container>
-      <md-select placeholder="Lead Type" ng-model="lead.lead_type">
+      <md-select placeholder="Lead Type" ng-model="lead.type">
         <md-option>Hot</md-option>
         <md-option>Cold</md-option>
       </md-select>

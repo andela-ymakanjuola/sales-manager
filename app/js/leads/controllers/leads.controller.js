@@ -19,19 +19,21 @@ angular.module('Leads')
         $scope.lead = null;
         $scope.submitted = false;
         $scope.phases = phases;
-        $scope.save = function() {
+        $scope.save = function(valid) {
           $scope.submitted = true;
-          $scope.lead.start_date = $scope.lead.startDate ? $scope.lead.startDate.getTime() : null;
-          delete $scope.lead.startDate;
-          LeadsService.create($scope.lead, function(err) {
-            if(err) {
-              ToastService('An error occurred');
-            }
-            else {
-              ToastService($scope.lead.contact + ' lead created!');
-            }
-            $mdDialog.hide();
-          });
+          if (valid) {
+            $scope.lead.start_date = $scope.lead.startDate ? $scope.lead.startDate.getTime() : null;
+            delete $scope.lead.startDate;
+            LeadsService.create($scope.lead, function(err) {
+              if(err) {
+                ToastService('An error occurred');
+              }
+              else {
+                ToastService($scope.lead.contact + ' lead created!');
+              }
+              $mdDialog.hide();
+            });
+          };
         };
         $scope.close = function() {
           $mdDialog.hide();
