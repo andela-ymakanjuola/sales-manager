@@ -5,7 +5,6 @@ angular.module('Phases')
   $scope.phases = PhasesService.get();
   $scope.selected = null;
   $scope.showProgress = true;
-
   $scope.phases.$loaded().then(function() {
     $scope.showProgress = false;
   });
@@ -28,6 +27,38 @@ angular.module('Phases')
           $scope.submitted = true;
           if(valid) {
             PhasesService.create($scope.phase, function(err) {
+              if(err) {
+                ToastService('An error occurred');
+              }
+              else {
+                ToastService($scope.phase.name + ' phase created!');
+              }
+              $mdDialog.hide();
+            });
+          }
+        };
+        $scope.close = function() {
+          $mdDialog.hide();
+        };
+      }],
+      templateUrl: 'app/js/phases/partials/new-phase.html',
+      targetEvent: ev
+    });
+  };
+  $scope.showPhase = function(ev, phase, phaseId) { 
+    $mdDialog.show({
+      controller: ['$scope', '$mdDialog', function($scope, $mdDialog) {
+        var self = $scope;
+        self.phase = phase;
+        console.log(phaseId);
+        self.number = phase.checklist.length;
+        $scope.getNumber = function(num) {
+          return num ? new Array(parseInt(num)): [];
+        };
+        $scope.save = function(valid) {
+          $scope.submitted = true;
+          if(valid) {
+            PhasesService.update($scope.phase, phaseId, function(err) {
               if(err) {
                 ToastService('An error occurred');
               }

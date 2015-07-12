@@ -8,8 +8,8 @@ angular.module('Leads')
   $scope.showProgress = true;
   $scope.leads.$loaded().then(function() {
     $scope.showProgress = false;
-    angular.forEach(phases, function(phase, id) {
-      $scope.phases[phase.name] = {name: phase.name,checklist:phases[id].checklist};
+    angular.forEach(phases, function(phase, phaseId) {
+      $scope.phases[phase.name] = {id: phaseId, name: phase.name,checklist:phases[phaseId].checklist};
     });
   });
 

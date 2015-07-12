@@ -1,0 +1,37 @@
+<md-dialog aria-label="Edit Phase Modal">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <span> Edit phase </span>
+    </div>
+  </md-toolbar>
+  <md-content style="max-height:300px;" layout-padding>
+    <form name="phaseForm">
+      <div layout="row">
+        <md-input-container>
+          <label>Phase No</label>
+          <input type="number" name="no" min="1" max ="5" value=1 ng-model="phase.no" required/>
+        </md-input-container>
+        <span flex></span>
+        <md-input-container>
+          <label>Phase Name</label>
+          <input type="text" name="name" ng-model="phase.name" required/>
+        </md-input-container>
+      </div>
+      <div>
+        <md-select placeholder="Add To-do List" ng-model="number">
+          <md-option ng-repeat="i in getNumber(10) track by $index">{{$index + 1}}</md-option>
+        </md-select>
+        <md-input-container ng-repeat="list in phase.checklist track by $index">
+          <label>To-do {{$index + 1}}</label>
+          <input type="text" name="todo" ng-model="phase.checklist[$index]" required>
+        </md-input-container>
+      </div>
+    </form>
+  </md-content>
+  <md-divider>
+    <div class="md-actions" layout="row" layout-align="end">
+      <md-button class="md-accent" ng-click="close()"> Cancel</md-button>
+      <md-button class="md-primary" ng-click="save(phaseForm.$valid)"> Save</md-button>
+    </div>
+  </md-divider>
+</md-dialog>
