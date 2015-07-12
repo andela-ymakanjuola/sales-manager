@@ -2,67 +2,126 @@
 <html ng-app="app">
   <head > 
     <title>Sales Manager</title>
-
     <!--CSS-->
-    <!-- <link rel="stylesheet" type="text/css" href="css/style.css">     -->
-    <link rel="stylesheet" href="node_modules/material-design-lite/material.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">    
+    <link rel="stylesheet" href="public/vendor/material-design-lite/material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="public/vendor/angular-material/angular-material.css">
+  </head>
+  <body>
+    <header layout="row">
+      <md-toolbar class="md-primary">
+        <h1 class="md-toolbar-tools">
+          <span>Sales Manager</span>
+          <span flex></span>
+          <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+              for="demo-menu-lower-right">
+            <li disabled class="mdl-menu__item">Yinka M</li>
+            <li disabled class="mdl-menu__item">Log Out</li>
+          </ul>
+        </h1>
+      </md-toolbar>
+    </header>   
+    <div class="container">
+      <md-content class="leads md-padding ng-scope md-default-theme" ng-controller="LeadsController as leads"> 
+        <md-toolbar class="md-primary" layout="row">
+          <h3 class="md-toolbar-tools">
+            <span>Leads</span>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="showLeadDialog($event, phases)"> 
+              <i class="material-icons" style="line-height: 50px;">add</i>
+              <md-tooltip>
+                Add New Lead
+              </md-tooltip>
+            </md-button> 
+          </h3>
+        </md-toolbar>
+        <md-progress-linear class="md-accent" ng-if="showProgress" md-mode="indeterminate"></md-progress-linear>
+        <table ng-hide="showProgress" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+          <thead style="text-align: left;">
+          <th class="mdl-data-table__cell--non-numeric">CONTACT </th>
+          <th class="mdl-data-table__cell--non-numeric">COMPANY </th>
+          <th style="width: 5%" class="mdl-data-table__cell--non-numeric">TYPE</th>
+          <th style="width: 5%" class="mdl-data-table__cell--non-numeric">DATE</th>
+          <th class="mdl-data-table__cell--non-numeric">SALES REP</th>
+          <th style="width: 5%" class="mdl-data-table__cell--non-numeric">STATUS</th>
+          </thead>
+          <tbody>
+            <tr ng-click="showLead($event,phases,lead)" ng-repeat="lead in leads">
+                <td class="data mdl-data-table__cell--non-numeric">{{ lead.contact }}</td>
+                <td class="data mdl-data-table__cell--non-numeric">{{ lead.company }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ lead.type }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ lead.start_date | date  }}</td>
+                <td class="data mdl-data-table__cell--non-numeric">{{ lead.sales_rep }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ lead.status.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </md-content>
+      <md-content class="phases md-padding ng-scope md-default-theme" ng-controller="PhasesController as phases"> 
+        <md-toolbar class="md-primary" layout="row">
+          <h3 class="md-toolbar-tools">
+            <span>Phases</span>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="showPhaseDialog($event)">
+              <i class="material-icons" style="line-height: 50px;">add</i>
+              <md-tooltip>
+                Add New Phase
+              </md-tooltip>
+            </md-button>
+          </h3>
+        </md-toolbar>
+        <md-progress-linear class="md-accent" ng-if="showProgress" md-mode="indeterminate"></md-progress-linear>
+        <table ng-hide="showProgress" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+          <thead style="text-align: left;">
+          <th class="mdl-data-table__cell--non-numeric">PHASE</th>
+          <th style="width: 75%" class="mdl-data-table__cell--non-numeric">TO-DO LIST</th>
+          </thead>
+          <tbody>
+            <tr ng-click="showPhase($event,phase, phaseId)" ng-repeat="(phaseId, phase) in phases">
+              <td class="mdl-data-table__cell--non-numeric">{{phase.name}}</td>
+              <td class="mdl-data-table__cell--non-numeric">
+                <ol style="margin: 0; padding-left: 20px;">
+                  <li ng-repeat="list in phase.checklist">{{list}}</li>
+                </ol>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-content>
+      <div style="clear: both"></div>
+    </div>
     
     <!--Dependencies-->
-    <link rel="stylesheet" type="text/css" href="node_modules/angular-material/angular-material.css">
-    <script src="node_modules/angular/angular.js"></script>
-    <script src="node_modules/angular-animate/angular-animate.js"></script>
-    <script src="node_modules/angular-aria/angular-aria.js"></script>
-    <script src="node_modules/angular-material/angular-material.js"></script>
-    <script src="node_modules/material-design-lite/material.min.js"></script>
+    <script src="public/vendor/angular/angular.js"></script>
+    <script src="public/vendor/angular-animate/angular-animate.js"></script>
+    <script src="public/vendor/angular-aria/angular-aria.js"></script>
+    <script src="public/vendor/angular-material/angular-material.js"></script>
+    <script src="public/vendor/material-design-lite/material.min.js"></script>
+    <script src="public/vendor/angularfire/dist/angularfire.js"></script>
+    <script src="public/vendor/firebase/firebase.js"></script>
       
     <!--Modules-->
     <script type="text/javascript" src="app/js/index.js"></script>
     <script type="text/javascript" src="app/js/leads/index.js"></script>
+    <script type="text/javascript" src="app/js/refs/index.js"></script>
+    <script type="text/javascript" src="app/js/phases/index.js"></script>
+    <script type="text/javascript" src="app/js/toast/index.js"></script>
 
-     <!--Controllers-->
+    <!--Controllers-->
     <script type="text/javascript" src="app/js/leads/controllers/leads.controller.js"></script>
+    <script type="text/javascript" src="app/js/phases/controllers/phases.controller.js"></script>
 
-     <!--Services-->      
+    <!--Services-->      
     <script type="text/javascript" src="app/js/leads/services/leads.service.js"></script>
+    <script type="text/javascript" src="app/js/refs/services/refs.service.js"></script>
+    <script type="text/javascript" src="app/js/phases/services/phases.service.js"></script>
+    <script type="text/javascript" src="app/js/toast/services/toast.service.js"></script>
+    
     <!--Directives-->
-    <!-- // <script type="text/javascript" src="app/js/leads/directives/leads.directive.js"></script> -->
-      
-  </head>
-  
-  <body>
-    <header layout="column">
-      <md-toolbar class="md-primary">
-            <h1 class="md-toolbar-tools">
-              <span>Sales Manager</span>
-            </h1>
-          </md-toolbar>
-    </header>   
-
-    <md-content class ="md-padding ng-scope md-default-theme"> 
-
-      <table class="mdl-data-table mdl-js-data-table">
-        <thead>
-        <th>Contact Name</th>
-        <th>Company Name</th>
-        <th>Type</th>
-        <th>Date</th>
-        <th>Sales Rep</th>
-        <th></th>
-        </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>    
-            
-    </md-content>
-  
+    <script type="text/javascript" src="app/js/leads/directives/leads.directive.js"></script>
   </body>
 </html>

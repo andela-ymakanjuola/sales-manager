@@ -1,6 +1,9 @@
 var express = require('express'),
     app = express();
 
-app.listen(3000, function() {
-  console.log('listening to port... ' + 3000);
-});
+
+app.get('/public');
+
+var server = app.listen(process.env.PORT || 5555, function() {
+    console.log('Listening on port %d', server.address().port);
+  });
