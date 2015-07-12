@@ -17,6 +17,13 @@
   },
   "homepage": "https://github.com/andela-ymakanjuola/sales-manager#readme",
   "dependencies": {
-    "express": "^4.13.1"
+    "angular": "^1.4.2",
+    "angular-animate": "^1.4.2",
+    "angular-aria": "^1.4.2",
+    "angular-material": "^0.10.0",
+    "angularfire": "^1.1.2",
+    "express": "^4.13.1",
+    "firebase": "^2.2.7",
+    "material-design-lite": "^1.0.0-3"
   }
 }
