@@ -50,7 +50,6 @@ angular.module('Phases')
       controller: ['$scope', '$mdDialog', function($scope, $mdDialog) {
         var self = $scope;
         self.phase = phase;
-        console.log(phaseId);
         self.number = phase.checklist.length;
         $scope.getNumber = function(num) {
           return num ? new Array(parseInt(num)): [];
