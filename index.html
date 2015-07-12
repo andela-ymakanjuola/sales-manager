@@ -42,23 +42,23 @@
             </md-button> 
           </h3>
         </md-toolbar>
-        <md-progress-linear ng-if="showProgress" md-mode="indeterminate"></md-progress-linear>
+        <md-progress-linear class="md-accent" ng-if="showProgress" md-mode="indeterminate"></md-progress-linear>
         <table ng-hide="showProgress" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
           <thead style="text-align: left;">
-          <th class="mdl-data-table__cell--non-numeric">Contact Name</th>
-          <th class="mdl-data-table__cell--non-numeric">Company Name</th>
-          <th class="mdl-data-table__cell--non-numeric">Type</th>
-          <th class="mdl-data-table__cell--non-numeric">Date</th>
-          <th class="mdl-data-table__cell--non-numeric">Sales Rep</th>
-          <th class="mdl-data-table__cell--non-numeric">Status</th>
+          <th class="mdl-data-table__cell--non-numeric">CONTACT </th>
+          <th class="mdl-data-table__cell--non-numeric">COMPANY </th>
+          <th style="width: 5%" class="mdl-data-table__cell--non-numeric">TYPE</th>
+          <th style="width: 5%" class="mdl-data-table__cell--non-numeric">DATE</th>
+          <th class="mdl-data-table__cell--non-numeric">SALES REP</th>
+          <th style="width: 5%" class="mdl-data-table__cell--non-numeric">STATUS</th>
           </thead>
           <tbody>
             <tr ng-click="showLead($event,phases,lead)" ng-repeat="lead in leads">
-                <td class="mdl-data-table__cell--non-numeric">{{ lead.contact }}</td>
-                <td class="mdl-data-table__cell--non-numeric">{{ lead.company }}</td>
+                <td class="data mdl-data-table__cell--non-numeric">{{ lead.contact }}</td>
+                <td class="data mdl-data-table__cell--non-numeric">{{ lead.company }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.type }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.start_date | date  }}</td>
-                <td class="mdl-data-table__cell--non-numeric">{{ lead.sales_rep }}</td>
+                <td class="data mdl-data-table__cell--non-numeric">{{ lead.sales_rep }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.status.name }}</td>
             </tr>
           </tbody>
@@ -77,17 +77,15 @@
             </md-button>
           </h3>
         </md-toolbar>
-        <md-progress-linear ng-if="showProgress" md-mode="indeterminate"></md-progress-linear>
+        <md-progress-linear class="md-accent" ng-if="showProgress" md-mode="indeterminate"></md-progress-linear>
         <table ng-hide="showProgress" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
           <thead style="text-align: left;">
-          <th class="mdl-data-table__cell--non-numeric">Phase</th>
-          <th class="mdl-data-table__cell--non-numeric">To-do List</th>
+          <th class="mdl-data-table__cell--non-numeric">PHASE</th>
+          <th style="width: 75%" class="mdl-data-table__cell--non-numeric">TO-DO LIST</th>
           </thead>
           <tbody>
             <tr ng-click="showPhase($event,phase, phaseId)" ng-repeat="(phaseId, phase) in phases">
-              <td class="mdl-data-table__cell--non-numeric">
-                <span>{{phase.name}}</span>
-              </td>
+              <td class="mdl-data-table__cell--non-numeric">{{phase.name}}</td>
               <td class="mdl-data-table__cell--non-numeric">
                 <ol style="margin: 0; padding-left: 20px;">
                   <li ng-repeat="list in phase.checklist">{{list}}</li>
