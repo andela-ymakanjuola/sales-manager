@@ -1,7 +1,7 @@
 <md-dialog aria-label="Edit Phase Modal">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <span> Edit phase </span>
+      <span> Edit {{phase.name}} phase </span>
     </div>
   </md-toolbar>
   <md-content style="max-height:300px;" layout-padding>
@@ -21,7 +21,7 @@
         <md-select placeholder="Add To-do List" ng-model="number">
           <md-option ng-repeat="i in getNumber(10) track by $index">{{$index + 1}}</md-option>
         </md-select>
-        <md-input-container ng-repeat="list in phase.checklist track by $index">
+        <md-input-container ng-repeat="i in getNumber(number) track by $index">
           <label>To-do {{$index + 1}}</label>
           <input type="text" name="todo" ng-model="phase.checklist[$index]" required>
         </md-input-container>

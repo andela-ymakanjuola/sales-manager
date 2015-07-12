@@ -73,7 +73,7 @@ angular.module('Phases')
           $mdDialog.hide();
         };
       }],
-      templateUrl: 'app/js/phases/partials/new-phase.html',
+      templateUrl: 'app/js/phases/partials/phase-edit.html',
       targetEvent: ev
     });
   };
