@@ -3,14 +3,15 @@ angular.module('Leads')
 .controller('LeadsController', ['$scope', '$mdDialog', 'LeadsService','PhasesService','ToastService', function($scope, $mdDialog, LeadsService, PhasesService, ToastService) {
 
   $scope.leads = LeadsService.get();
-  var phases = PhasesService.get();
   $scope.phases = {};
-  $scope.showProgress = true;
-  $scope.leads.$loaded().then(function() {
-    $scope.showProgress = false;
+  PhasesService.get(function(phases){
     angular.forEach(phases, function(phase, phaseId) {
       $scope.phases[phase.name] = {id: phaseId, name: phase.name,checklist:phases[phaseId].checklist};
     });
+  });
+  $scope.showProgress = true;
+  $scope.leads.$loaded().then(function() {
+    $scope.showProgress = false;
   });
 
   $scope.showLeadDialog = function(ev, phases) {

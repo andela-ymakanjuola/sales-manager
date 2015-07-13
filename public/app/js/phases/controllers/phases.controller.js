@@ -56,17 +56,16 @@ angular.module('Phases')
         };
         $scope.save = function(valid) {
           $scope.submitted = true;
-          if(valid) {
-            PhasesService.update($scope.phase, phaseId, function(err) {
-              if(err) {
-                ToastService('An error occurred');
-              }
-              else {
-                ToastService($scope.phase.name + ' phase created!');
-              }
-              $mdDialog.hide();
-            });
-          }
+          PhasesService.update($scope.phase, phaseId, function(err) {
+            console.log('saving');
+            if(err) {
+              ToastService('An error occurred');
+            }
+            else {
+              ToastService($scope.phase.name + ' phase updated!');
+            }
+            $mdDialog.hide();
+          });
         };
         $scope.close = function() {
           $mdDialog.hide();
