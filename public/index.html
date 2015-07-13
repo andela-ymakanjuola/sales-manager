@@ -47,15 +47,36 @@
           <th style="width: 5%" class="mdl-data-table__cell--non-numeric">DATE</th>
           <th class="mdl-data-table__cell--non-numeric">SALES REP</th>
           <th style="width: 5%" class="mdl-data-table__cell--non-numeric">STATUS</th>
+          <th style="width: 8%" class="mdl-data-table__cell--non-numeric"></th>
           </thead>
           <tbody>
-            <tr ng-click="showLead($event,phases,lead)" ng-repeat="lead in leads">
+            <tr ng-mouseenter="hoverIn()" ng-mouseleave="hoverOut()" ng-repeat="(leadId,lead) in leads">
                 <td class="data mdl-data-table__cell--non-numeric">{{ lead.contact }}</td>
                 <td class="data mdl-data-table__cell--non-numeric">{{ lead.company }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.type }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.start_date | date  }}</td>
                 <td class="data mdl-data-table__cell--non-numeric">{{ lead.sales_rep }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ lead.status.name }}</td>
+                <td style="margin-left:0;padding-left: 0;padding-right: 5px">
+                  <a ng-show="showButton" ng-click="showLead($event,phases,lead)">
+                    <i class="actions material-icons">info</i>
+                    <md-tooltip>
+                      View Checklist
+                    </md-tooltip>
+                  </a>
+                  <a ng-show="showButton" ng-click="showEditLead($event,phases,leadId,lead)">
+                    <i class="actions material-icons">edit</i>
+                    <md-tooltip>
+                      Edit Lead
+                    </md-tooltip>
+                  </a>
+                  <a ng-show="showButton" ng-click="showConfirm($event,leadId,lead)">
+                    <i class="actions material-icons">delete</i>
+                    <md-tooltip>
+                      Delete Lead
+                    </md-tooltip>
+                  </a>
+                </td>
             </tr>
           </tbody>
         </table>

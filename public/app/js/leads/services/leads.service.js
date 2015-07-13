@@ -34,6 +34,17 @@ angular.module('Leads')
           cb();
         }
       });
+    },
+
+    delete: function(id, cb) {
+      Refs.leads.child(id).remove(function(err) {
+        if(err) {
+          cb(err);
+        }
+        else {
+          cb();
+        }
+      });
     }
 
   };
