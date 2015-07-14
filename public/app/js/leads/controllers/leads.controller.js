@@ -24,7 +24,6 @@ angular.module('Leads')
   $scope.showLeadDialog = function(ev, phases) {
     $mdDialog.show({
       controller: ['$scope', '$mdDialog', function($scope, $mdDialog) {
-        $scope.lead = null;
         $scope.submitted = false;
         $scope.phases = phases;
         $scope.save = function(valid) {
@@ -52,20 +51,16 @@ angular.module('Leads')
     });
   };
 
-  $scope.showLead = function(ev, phases, lead) {
+  $scope.showLead = function(ev, phases, leadId, lead) {
     $mdDialog.show({
       controller: ['$scope', '$mdDialog', function($scope, $mdDialog) {
         var self = $scope;
-        self.lead = lead;
         self.submitted = false;
+        self.lead = lead;
         self.phases = phases;
         $scope.save = function() {
           self.submitted = true;
-          var id = self.lead.$id;
-          delete self.lead.$id;
-          delete self.lead.$priority;
-          delete self.lead.$$hashKey;
-          LeadsService.update(self.lead, id, function(err) {
+          LeadsService.update(self.lead, leadId, function(err) {
             if(err) {
               ToastService('An error occurred');
             }
@@ -88,21 +83,15 @@ angular.module('Leads')
     $mdDialog.show({
       controller: ['$scope', '$mdDialog', function($scope, $mdDialog) {
         var self = $scope;
-        self.lead = lead;
         self.submitted = false;
+        self.lead = lead;
         self.phases = phases;
-        self.lead.startDate = self.lead.start_date ? new Date(self.lead.start_date) : null;
-
+        self.startDate = self.lead.start_date ? new Date(self.lead.start_date) : null;
         $scope.save = function(valid) {
           self.submitted = true;
-          self.lead.start_date = self.lead.startDate ? self.lead.startDate.getTime() : null;
           if(valid) {
-            var id = self.lead.$id;
-            delete self.lead.$id;
-            delete self.lead.$priority;
-            delete self.lead.$$hashKey;
-            delete self.lead.startDate;
-            LeadsService.update(self.lead, id, function(err) {
+            self.lead.start_date = self.startDate ? self.startDate.getTime() : null;
+            LeadsService.update(self.lead, leadId, function(err) {
               if(err) {
                 ToastService('An error occurred');
               }

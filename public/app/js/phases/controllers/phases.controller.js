@@ -57,7 +57,6 @@ angular.module('Phases')
         $scope.save = function(valid) {
           $scope.submitted = true;
           PhasesService.update($scope.phase, phaseId, function(err) {
-            console.log('saving');
             if(err) {
               ToastService('An error occurred');
             }

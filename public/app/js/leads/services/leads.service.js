@@ -5,7 +5,7 @@ angular.module('Leads')
 
     get: function(cb) {
       if(!cb) {
-        return $firebaseArray(Refs.leads);
+        return $firebaseObject(Refs.leads);
       }
       else {
         Refs.leads.once('value', function(snap) {
