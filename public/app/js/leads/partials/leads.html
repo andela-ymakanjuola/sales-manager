@@ -5,15 +5,12 @@
     </div>
   </md-toolbar>
   <md-content style="max-height:300px;" layout-padding>
-
     <md-select placeholder="Status" ng-model="lead.status.name">
       <md-option ng-repeat="phase in phases">{{phase.name}}</md-option>
     </md-select>
-
     <md-checkbox ng-repeat = "list in phases[lead.status.name].checklist" ng-model="lead.status.todo[list]" >
       {{ list }}
     </md-checkbox>
-
   </md-content>
   <md-divider>
     <div class="md-actions" layout="row" layout-align="end">

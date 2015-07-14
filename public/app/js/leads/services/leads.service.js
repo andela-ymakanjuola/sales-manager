@@ -2,7 +2,6 @@ angular.module('Leads')
 
 .factory('LeadsService',['$firebaseArray', '$firebaseObject', 'Refs', function($firebaseArray, $firebaseObject, Refs) {
   return {
-
     get: function(cb) {
       if(!cb) {
         return $firebaseObject(Refs.leads);
@@ -13,7 +12,6 @@ angular.module('Leads')
         });
       }
     },
-
     create: function(lead, cb) {
       var leadRef = Refs.leads.push(lead, function(err) {
         if(err) {
@@ -24,7 +22,6 @@ angular.module('Leads')
         }
       });
     },
-
     update: function(data, id, cb) {
       Refs.leads.child(id).update(data, function(err) {
         if(err) {
@@ -35,7 +32,6 @@ angular.module('Leads')
         }
       });
     },
-
     delete: function(id, cb) {
       Refs.leads.child(id).remove(function(err) {
         if(err) {
@@ -46,6 +42,5 @@ angular.module('Leads')
         }
       });
     }
-
   };
 }]);

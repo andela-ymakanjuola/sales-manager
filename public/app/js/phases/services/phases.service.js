@@ -2,7 +2,6 @@ angular.module('Phases')
 
 .factory('PhasesService',['$firebaseArray', '$firebaseObject', 'Refs', function($firebaseArray, $firebaseObject, Refs) {
   return {
-
     get: function(cb) {
       if(!cb) {
         return $firebaseObject(Refs.phases);
@@ -13,9 +12,8 @@ angular.module('Phases')
         });
       }
     },
-
     create: function(lead, cb) {
-      var phaseref = Refs.phases.push(lead, function(err) {
+      var phaseref = Refs.phases.child(lead.name).set(lead, function(err) {
         if(err) {
           cb(err);
         }
@@ -24,9 +22,18 @@ angular.module('Phases')
         }
       });
     },
-
     update: function(data, id, cb) {
       Refs.phases.child(id).update(data, function(err) {
+        if(err) {
+          cb(err);
+        }
+        else {
+          cb();
+        }
+      });
+    },
+    delete: function(id, cb) {
+      Refs.leads.child(id).remove(function(err) {
         if(err) {
           cb(err);
         }
