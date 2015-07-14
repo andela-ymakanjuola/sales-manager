@@ -8,7 +8,7 @@
     <md-select placeholder="Status" ng-model="lead.status.name">
       <md-option ng-repeat="phase in phases">{{phase.name}}</md-option>
     </md-select>
-    <md-checkbox ng-repeat = "list in phases[lead.status.name].checklist" ng-model="lead.status.todo[list]" >
+    <md-checkbox ng-repeat = "list in checklists[lead.status.name].checklist" ng-model="lead.status.todo[list]" >
       {{ list }}
     </md-checkbox>
   </md-content>

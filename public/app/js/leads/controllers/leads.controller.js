@@ -3,24 +3,17 @@ angular.module('Leads')
 .controller('LeadsController', ['$scope', '$mdDialog', 'LeadsService','PhasesService','ToastService', function($scope, $mdDialog, LeadsService, PhasesService, ToastService) {
 
   $scope.leads = LeadsService.get();
-  $scope.phases = {};
-  PhasesService.get(function(phases){
-    angular.forEach(phases, function(phase, phaseId) {
-      $scope.phases[phase.name] = {id: phaseId, name: phase.name,checklist:phases[phaseId].checklist};
-    });
-  });
+  $scope.phases = PhasesService.get();
   $scope.showProgress = true;
   $scope.leads.$loaded().then(function() {
     $scope.showProgress = false;
   });
-
   $scope.hoverIn=function(){
     this.showButton = true;
   };
   $scope.hoverOut=function(){
     this.showButton = false;
   };
-
   $scope.showLeadDialog = function(ev, phases) {
     $mdDialog.show({
       controller: ['$scope', '$mdDialog', function($scope, $mdDialog) {
@@ -50,11 +43,13 @@ angular.module('Leads')
       targetEvent: ev
     });
   };
-
   $scope.showLead = function(ev, phases, leadId, lead) {
     $mdDialog.show({
       controller: ['$scope', '$mdDialog', function($scope, $mdDialog) {
         var self = $scope;
+        PhasesService.get(function(checklists) {
+          self.checklists = checklists;
+        });
         self.submitted = false;
         self.lead = lead;
         self.phases = phases;
@@ -78,7 +73,6 @@ angular.module('Leads')
       targetEvent: ev
     });
   };
-
   $scope.showEditLead = function(ev, phases,leadId, lead) {
     $mdDialog.show({
       controller: ['$scope', '$mdDialog', function($scope, $mdDialog) {
@@ -110,7 +104,6 @@ angular.module('Leads')
       targetEvent: ev
     });
   };
-
   $scope.showConfirm = function(ev,leadId, lead) {
     var confirm = $mdDialog.confirm()
       .parent(angular.element(document.body))
@@ -133,3 +126,4 @@ angular.module('Leads')
     });
   };
 }]);
+

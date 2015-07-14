@@ -8,11 +8,15 @@ angular.module('Phases')
   $scope.phases.$loaded().then(function() {
     $scope.showProgress = false;
   });
-
+  $scope.hoverIn=function(){
+    this.showButton = true;
+  };
+  $scope.hoverOut=function(){
+    this.showButton = false;
+  };
   $scope.getChecklist = function(phaseId) {
     return $scope.phases[phaseId].checklist;
   };
-  
   $scope.showPhaseDialog = function(ev) { 
     $mdDialog.show({
       controller: ['$scope', '$mdDialog', function($scope, $mdDialog) {
@@ -56,7 +60,10 @@ angular.module('Phases')
         };
         $scope.save = function(valid) {
           $scope.submitted = true;
-          PhasesService.update($scope.phase, phaseId, function(err) {
+          delete self.phase.$$hashKey;
+          delete self.phase.$id;
+          delete self.phase.$priority;
+          PhasesService.update(self.phase, phase.name, function(err) {
             if(err) {
               ToastService('An error occurred');
             }
@@ -72,6 +79,27 @@ angular.module('Phases')
       }],
       templateUrl: 'app/js/phases/partials/phase-edit.html',
       targetEvent: ev
+    });
+  };
+  $scope.showConfirm = function(ev, phase) {
+    var confirm = $mdDialog.confirm()
+      .parent(angular.element(document.body))
+      .title('Delete ' + phase.name + '?!')
+      .content('You cannot revert this!')
+      .ariaLabel('Lead Delete')
+      .ok('ok')
+      .cancel('cancel')
+      .targetEvent(ev);
+    $mdDialog.show(confirm).then(function() {
+      PhasesService.delete(phase.$id, function(err) {
+        if(err) {
+          ToastService('An error occurred');
+        }
+        else {
+          ToastService('phase deleted!');
+        }
+        $mdDialog.hide();
+      });
     });
   };
 }]);

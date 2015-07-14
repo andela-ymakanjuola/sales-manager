@@ -99,14 +99,29 @@
           <thead style="text-align: left;">
           <th class="mdl-data-table__cell--non-numeric">PHASE</th>
           <th style="width: 75%" class="mdl-data-table__cell--non-numeric">TO-DO LIST</th>
+          <th style="width: 5%" class="mdl-data-table__cell--non-numeric"></th>
           </thead>
           <tbody>
-            <tr ng-click="showPhase($event,phase, phaseId)" ng-repeat="(phaseId, phase) in phases">
+            <tr ng-mouseenter="hoverIn()" ng-mouseleave="hoverOut()" ng-repeat="(phaseId, phase) in phases">
               <td class="mdl-data-table__cell--non-numeric">{{phase.name}}</td>
               <td class="mdl-data-table__cell--non-numeric">
                 <ol style="margin: 0; padding-left: 20px;">
                   <li ng-repeat="list in phase.checklist">{{list}}</li>
                 </ol>
+              </td>
+              <td style="margin-left:0;padding-left: 0;padding-right: 5px">
+                <a ng-show="showButton"  ng-click="showPhase($event,phase, phaseId)" >
+                  <i class="actions material-icons">edit</i>
+                  <md-tooltip>
+                    Edit Phase
+                  </md-tooltip>
+                </a>
+                <a ng-show="showButton" ng-click="showConfirm($event,phase)">
+                  <i class="actions material-icons">delete</i>
+                  <md-tooltip>
+                    Delete Phase
+                  </md-tooltip>
+                </a>
               </td>
             </tr>
           </tbody>

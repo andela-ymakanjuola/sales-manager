@@ -4,7 +4,7 @@ angular.module('Phases')
   return {
     get: function(cb) {
       if(!cb) {
-        return $firebaseObject(Refs.phases);
+        return $firebaseArray(Refs.phases.orderByChild('no'));
       }
       else {
         Refs.phases.orderByChild('no').once('value', function(snap) {
@@ -33,7 +33,7 @@ angular.module('Phases')
       });
     },
     delete: function(id, cb) {
-      Refs.leads.child(id).remove(function(err) {
+      Refs.phases.child(id).remove(function(err) {
         if(err) {
           cb(err);
         }

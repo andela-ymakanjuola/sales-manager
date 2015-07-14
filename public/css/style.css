@@ -23,6 +23,10 @@
   word-wrap: break-word;  
 }
 
+.actions {
+  color: #B86660;
+  font-size: 16px !important;
+}
 md-toolbar {
   box-shadow: 1px 2px 1px #999999;
 }
@@ -37,8 +41,4 @@ li {
 }
 a:hover {
   cursor: pointer;
-}
-.actions {
-  color: #B86660;
-  font-size: 16px !important;
 }
